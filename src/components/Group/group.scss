@@ -1,0 +1,34 @@
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    height: calc(100vh - 72px);
+    position: relative;
+    .sidebar{
+        height: 100%;
+        width: 280px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: red;
+        transition: all linear 1s;
+    }
+    .lists{
+        background: blue;
+        height: 100%;
+        position: absolute;
+        left: 280px;
+        width: calc(100% - 280px);
+        top: 0;
+         transition: all linear 1s;
+    }
+
+    .sidebar.active{
+        left: -280px;
+        
+    }
+    .lists.act{
+        left:0;
+        width: 100%;
+    }
+}
