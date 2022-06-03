@@ -1,0 +1,106 @@
+.wrapper {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  .row {
+    width: 700px;
+    .col {
+      width: 100%;
+      .qr {
+        display: flex;
+        align-items: center;
+        span {
+          svg {
+            font-size: 50px;
+            font-weight: 500;
+            opacity: 0.6;
+          }
+          margin-right: 20px;
+        }
+        .qr-name {
+          width: 100%;
+          border-radius: 3px;
+          height: 56px !important;
+          font-weight: 600;
+          font-size: 25px;
+          border: 2px solid #616568;
+          border-color: #eaeaea;
+          background-color: transparent;
+          padding: 0 44px 2px 9px;
+          color: #616568;
+        }
+        margin-bottom: 30px;
+      }
+      .qr-input {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-gap: 20px;
+        background: #fff;
+        border: 1px #d4d4d4 solid;
+        padding: 20px 20px;
+        .input_wrap {
+          width: 100%;
+          h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #797d80;
+            padding-top: 15px;
+            padding-bottom: 15px;
+          }
+          input {
+            display: block;
+            height: 44px;
+            width: 100%;
+            margin-bottom: 0px;
+            background-color: #fff;
+            border: 2px solid #eaeaea;
+            border-radius: 2px;
+            padding-left: 15px;
+            padding-right: 15px;
+            font-size: 15px;
+            color: #616568;
+            font-weight: 600;
+            outline: none;
+            box-sizing: border-box;
+          }
+        }
+        .select_wrap {
+            width: 100%;
+            h1{
+                 font-size: 20px;
+            font-weight: 600;
+            color: #797d80;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            }
+            select{
+                width: 80%;
+                height: 44px;
+                border: 2px solid #eaeaea;
+                padding: 0 5px;
+                box-sizing: border-box;
+            }
+        }
+      }
+    }
+  }
+
+  .qr-img{
+      .btn{
+          cursor: pointer;
+          width: 100%;
+          font-size: 20px;
+          color: white;
+          background: #00bfff;
+          padding: 10px 0;
+          border-radius: 10px;
+          border: 0;
+          margin-top: 20px;
+          &:hover{
+              background: #2abbeb;
+          }
+      }
+  }
+}
