@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
-import { BsBell } from "react-icons/bs";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { FiFilePlus } from "react-icons/fi";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import imgDesktopLogo from '../../assets/img/qrcg-pro-logo.svg'
 import imgMobilLogo from "../../assets/img/qrcg-pro-logo-short.svg";
 import "./toolbar.scss";
+import { Link } from "react-router-dom";
 
 const Toolbar = ({open,setOpen}) => {
   
@@ -29,21 +30,21 @@ const Toolbar = ({open,setOpen}) => {
         <div className="toolbar_navigation-items">
           <ul>
             <li>
-              <a href="#">
-                <BsBell />
-              </a>
+              <Link to="/">
+                <FiFilePlus />
+              </Link>
             </li>
             <li>
-              <a href="#">
-                <AiOutlineQuestionCircle />
-              </a>
+              <Link to="/create">
+                <AiOutlinePlusCircle />
+              </Link>
             </li>
             <span></span>
             <li>
-              <a href="#">
+              <Link to="/">
                 <BsPerson />
                 <p>Account</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

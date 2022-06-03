@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Group from "./components/Group/group";
 import QrCode from "./components/qr-code/qr-code";
 import Toolbar from "./components/Toolbar/toolbar";
@@ -8,11 +9,16 @@ const App = () =>{
   const [open, setOpen] = useState(false)
 
     return (
-      <div style={{ height: "100%" }}>
+      <BrowserRouter>
+
+      <div style={{ height: "100vh" }}>
         <Toolbar open={open} setOpen={setOpen}/>
-        {/* <Group open={open}/> */}
-        <QrCode/>
+          <Routes>
+            <Route path="/" element={<Group />} />
+            <Route path="/create" element={<QrCode />} />
+          </Routes>
       </div>
+      </BrowserRouter>
     );
 }
 
