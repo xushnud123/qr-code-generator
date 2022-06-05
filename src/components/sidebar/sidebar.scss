@@ -1,0 +1,42 @@
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background: #616568;
+  .row {
+    padding: 32px 15px 0 15px;
+    .search {
+      width: 100%;
+      position: relative;
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 10px 0 40px;
+        height: 44px;
+        border-radius: 22px;
+        border: 1px solid #797d80;
+        background: #53585b;
+        color: #a4a6a8;
+        &:focus-visible {
+          outline: none;
+          color: #fff;
+        }
+        &:focus {
+          color: #fff;
+          border: 1px solid #fff;
+          &::placeholder{
+              color: #fff;
+          }
+        }
+      }
+      span {
+          position: absolute;
+          top: 25%;
+          left: 10px;
+          svg{
+              font-size: 24px;
+              color: #797d80;
+          }
+      }
+    }
+  }
+}

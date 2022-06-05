@@ -9,6 +9,10 @@ const QrCode = () => {
   const [colorCircle, setColorCircle] = useState("#000000");
   const [bgcolor, setBgColor] = useState("#5FD4F3");
   const [value, setValue] = useState("");
+  const [todos, setTodos] = useState(() => {
+    const localData = localStorage.getItem("todos");
+    return localData ? JSON.parse(localData) : [];
+  });
   const [options, setOptions] = useState({
     width: 300,
     height: 300,
@@ -73,7 +77,6 @@ const QrCode = () => {
 
  useEffect(() => {
    setOptions({ ...options, cornersSquareOptions: { color: colorCircle } });
-
  }, [colorCircle]);
 
   useEffect(() => {
@@ -109,7 +112,15 @@ const QrCode = () => {
     });
   };
 
+  const handleSave = () => {
+    setTodos([...todos,options])
+    console.log(options)
+    console.log(todos)
+    localStorage.setItem("todos", JSON.stringify([...todos, options]));
+  }
+
   return (
+    
     <div className="wrapper">
       <div className="row">
         <div className="col">
@@ -161,6 +172,9 @@ const QrCode = () => {
         <div ref={ref} className="qr" />
         <button onClick={() => onDownloadClick()} className="btn">
           Download
+        </button>
+        <button onClick={() => handleSave()} className="btn">
+          Save
         </button>
       </div>
     </div>
