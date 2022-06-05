@@ -14,7 +14,7 @@ const App = () =>{
       <div style={{ height: "100vh" }}>
         <Toolbar open={open} setOpen={setOpen}/>
           <Routes>
-            <Route path="/" element={<Group />} />
+            <Route path="/" element={<Group open={open} />} />
             <Route path="/create" element={<QrCode />} />
           </Routes>
       </div>
