@@ -1,14 +1,15 @@
 .wrapper {
-  display: flex;
-  width: 80%;
-  height: calc(100vh - 72px);
-  margin: 0 auto;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  margin: 0 60px;
+  width: calc(100% - 120px);
+  grid-template-columns: 70% 30%;
   .row {
-    width: 700px;
     .col {
       width: 100%;
+      background: #fff;
+      border: 1px #d4d4d4 solid;
+      padding: 20px;
+      box-sizing: border-box;
       .qr {
         display: flex;
         align-items: center;
@@ -38,9 +39,6 @@
         display: grid;
         grid-template-columns: 70% 30%;
         grid-gap: 20px;
-        background: #fff;
-        border: 1px #d4d4d4 solid;
-        padding: 20px 20px;
         .input_wrap {
           width: 100%;
           h1 {
@@ -84,21 +82,24 @@
             box-sizing: border-box;
           }
         }
-
-        .colors {
-          display: flex;
-          .color {
-            &:not(:nth-child(1)) {
-              margin-left: 20px;
-            }
-            h1 {
-              font-size: 20px;
-              font-weight: 600;
-              color: #797d80;
-              padding-top: 15px;
-              padding-bottom: 15px;
-              margin-bottom: 15px;
-            }
+      }
+      .colors {
+        display: grid;
+        grid-template-columns: repeat(3, 30%);
+        grid-gap: 5%;
+        .color {
+          box-sizing: border-box;
+          padding: 0 10px;
+          .react-colorful {
+            width: 100%;
+          }
+          h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #797d80;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
           }
         }
       }
@@ -106,30 +107,103 @@
   }
 
   .qr-img {
-    margin-left: 40px;
-    .btn {
-      cursor: pointer;
-      width: 100%;
-      font-size: 20px;
-      color: white;
-      background: #00bfff;
-
-      border-radius: 10px;
-      border: 0;
-      margin-top: 20px;
-      &:hover {
-        background: #2abbeb;
-      }
-      p {
-        padding: 10px 0;
-      }
-      .save {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    .qr {
+      width: max-content;
+      width: 300px;
+    }
+    .btns {
+      width: 300px;
+      .btn {
+        cursor: pointer;
         width: 100%;
+        font-size: 20px;
         color: white;
-        text-decoration: none;
-        p {
-          width: 100%;
+        background: #00bfff;
+
+        border-radius: 10px;
+        border: 0;
+        margin-top: 20px;
+        &:hover {
+          background: #2abbeb;
         }
+        p {
+          padding: 10px 0;
+        }
+        .save {
+          width: 100%;
+          color: white;
+          text-decoration: none;
+          p {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1300px) {
+    width: calc(100% - 60px);
+    margin: 0 30px;
+    display: grid;
+    grid-template-columns: 60% 35%;
+    grid-gap: 5%;
+    .row {
+      width: 100%;
+      .col {
+        .qr-input {
+        }
+        .colors {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(3, 32%);
+          grid-gap: 2%;
+          .color {
+            margin-left: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+    .qr-img {
+      width: 100%;
+      margin-left: 0;
+      justify-self: flex-end;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .qr {
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      button {
+        width: 300px;
+      }
+    }
+  }
+  @media screen and (max-width: 950px) {
+    grid-template-columns: repeat(1, 1fr);
+    .qr-img{
+      align-items: center;
+      flex-direction: inherit ;
+      .btns{
+        margin-left: 20px;
+      }
+    }
+  }
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(1, 1fr);
+    .qr-img{
+      align-items: center;
+      flex-direction: inherit ;
+      .btns{
+        width: 250px;
+        margin-left: 20px;
       }
     }
   }

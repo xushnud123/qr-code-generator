@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
+import { Link } from "react-router-dom";
 import { HexColorPicker } from "react-colorful";
 import { CgWebsite } from "react-icons/cg";
 import "./qr-code.scss";
-import { Link } from "react-router-dom";
 
 const QrCode = () => {
-  const [color, setColor] = useState("#000000");
-  const [colorCircle, setColorCircle] = useState("#000000");
-  const [bgcolor, setBgColor] = useState("#5FD4F3");
+  const [colors, setColors] = useState({
+    color: "#000000",
+    bgcolor: "#5FD4F3",
+    colorCircle: "#ffffff",
+  });
   const [value, setValue] = useState("");
   const [todos, setTodos] = useState(() => {
     const localData = localStorage.getItem("todos");
@@ -19,7 +21,7 @@ const QrCode = () => {
     height: 300,
     type: "svg",
     data: "http://qr-code-styling.com",
-    image: "/favicon.ico",
+    // image: "/favicon.ico",
     margin: 10,
     qrOptions: {
       typeNumber: 0,
@@ -33,62 +35,40 @@ const QrCode = () => {
       crossOrigin: "anonymous",
     },
     dotsOptions: {
-      color: "000000",
-      // gradient: {
-      //   type: 'linear', // 'radial'
-      //   rotation: 0,
-      //   colorStops: [{ offset: 0, color: '#8688B2' }, { offset: 1, color: '#77779C' }]
-      // },
+      color: colors.color,
       type: "rounded",
     },
     backgroundOptions: {
-      color: "#5FD4F3",
-      // gradient: {
-      //   type: 'linear', // 'radial'
-      //   rotation: 0,
-      //   colorStops: [{ offset: 0, color: '#ededff' }, { offset: 1, color: '#e6e7ff' }]
-      // },
+      color: colors.bgcolor,
     },
     cornersSquareOptions: {
-      color: "#222222",
+      color: colors.colorCircle,
       type: "extra-rounded",
-      // gradient: {
-      //   type: 'linear', // 'radial'
-      //   rotation: 180,
-      //   colorStops: [{ offset: 0, color: '#25456e' }, { offset: 1, color: '#4267b2' }]
-      // },
     },
     cornersDotOptions: {
       color: "#222222",
       type: "dot",
-      // gradient: {
-      //   type: 'linear', // 'radial'
-      //   rotation: 180,
-      //   colorStops: [{ offset: 0, color: '#00266e' }, { offset: 1, color: '#4060b3' }]
-      // },
     },
   });
   const [fileExt, setFileExt] = useState("svg");
   const [qrCode] = useState(new QRCodeStyling(options));
   const ref = useRef(null);
 
-  useEffect(()=>{
-    setOptions({ ...options, dotsOptions: { color: color } });
-  },[color])
-
- useEffect(() => {
-   setOptions({ ...options, cornersSquareOptions: { color: colorCircle } });
- }, [colorCircle]);
-
   useEffect(() => {
-    setOptions({ ...options, backgroundOptions: { color: bgcolor } });
-  }, [bgcolor]);
+    setOptions({
+      ...options,
+      cornersSquareOptions: { color: colors.colorCircle },
+      backgroundOptions: { color: colors.bgcolor },
+      dotsOptions: { color: colors.color },
+    });
+  }, [colors]);
+
 
   useEffect(() => {
     if (ref.current) {
       qrCode.append(ref.current);
     }
-  }, [qrCode, ref, color]);
+  }, [qrCode, ref, colors]);
 
   useEffect(() => {
     if (!qrCode) return;
@@ -114,11 +94,11 @@ const QrCode = () => {
   };
 
   const handleSave = () => {
-    setTodos([...todos,options])
-    console.log(options)
-    console.log(todos)
+    setTodos([...todos, options]);
+    console.log(options);
+    console.log(todos);
     localStorage.setItem("todos", JSON.stringify([...todos, options]));
-  }
+  };
 
   return (
     <div className="wrapper">
@@ -151,33 +131,44 @@ const QrCode = () => {
                 <option value="webp">WEBP</option>
               </select>
             </div>
-            <div className="colors">
-              <div className="color">
-                <h1>Color dots:</h1>
-                <HexColorPicker color={color} onChange={setColor} />
-              </div>
-              <div className="color">
-                <h1>Color Square:</h1>
-                <HexColorPicker color={colorCircle} onChange={setColorCircle} />
-              </div>
-              <div className="color">
-                <h1>Color Square:</h1>
-                <HexColorPicker color={bgcolor} onChange={setBgColor} />
-              </div>
+          </div>
+          <div className="colors">
+            <div className="color">
+              <h1>Color dots:</h1>
+              <HexColorPicker
+                color={colors.color}
+                onChange={(e) => setColors({ ...colors, color: e })}
+              />
+            </div>
+            <div className="color">
+              <h1>Color Square:</h1>
+              <HexColorPicker
+                color={colors.colorCircle}
+                onChange={(e) => setColors({ ...colors, colorCircle: e })}
+              />
+            </div>
+            <div className="color">
+              <h1>Color Square:</h1>
+              <HexColorPicker
+                color={colors.bgcolor}
+                onChange={(e) => setColors({ ...colors, bgcolor: e })}
+              />
             </div>
           </div>
         </div>
       </div>
       <div className="qr-img">
         <div ref={ref} className="qr" />
-        <button onClick={() => onDownloadClick()} className="btn">
-          <p>Download</p>
-        </button>
-        <button onClick={() => handleSave()} className="btn">
-          <Link to="/" className="save">
-            <p>Save</p>
-          </Link>
-        </button>
+        <div className="btns">
+          <button onClick={() => onDownloadClick()} className="btn">
+            <p>Download</p>
+          </button>
+          <button onClick={() => handleSave()} className="btn">
+            <Link to="/" className="save">
+              <p>Save</p>
+            </Link>
+          </button>
+        </div>
       </div>
     </div>
   );
