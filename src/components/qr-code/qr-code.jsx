@@ -3,6 +3,7 @@ import QRCodeStyling from "qr-code-styling";
 import { HexColorPicker } from "react-colorful";
 import { CgWebsite } from "react-icons/cg";
 import "./qr-code.scss";
+import { Link } from "react-router-dom";
 
 const QrCode = () => {
   const [color, setColor] = useState("#000000");
@@ -120,7 +121,6 @@ const QrCode = () => {
   }
 
   return (
-    
     <div className="wrapper">
       <div className="row">
         <div className="col">
@@ -171,10 +171,12 @@ const QrCode = () => {
       <div className="qr-img">
         <div ref={ref} className="qr" />
         <button onClick={() => onDownloadClick()} className="btn">
-          Download
+          <p>Download</p>
         </button>
         <button onClick={() => handleSave()} className="btn">
-          Save
+          <Link to="/" className="save">
+            <p>Save</p>
+          </Link>
         </button>
       </div>
     </div>

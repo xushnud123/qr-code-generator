@@ -87,8 +87,8 @@
 
         .colors {
           display: flex;
-          .color{
-            &:not(:nth-child(1)){
+          .color {
+            &:not(:nth-child(1)) {
               margin-left: 20px;
             }
             h1 {
@@ -113,12 +113,23 @@
       font-size: 20px;
       color: white;
       background: #00bfff;
-      padding: 10px 0;
+
       border-radius: 10px;
       border: 0;
       margin-top: 20px;
       &:hover {
         background: #2abbeb;
+      }
+      p {
+        padding: 10px 0;
+      }
+      .save {
+        width: 100%;
+        color: white;
+        text-decoration: none;
+        p {
+          width: 100%;
+        }
       }
     }
   }
