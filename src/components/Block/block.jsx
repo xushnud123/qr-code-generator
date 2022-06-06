@@ -7,16 +7,9 @@ import { BsArrowReturnRight } from "react-icons/bs";
 import "./block.scss";
 import QrCoder from "../common/qr-coder/qr-coder";
 
-export default function Block() {
-   const [todos, setTodos] = useState(() => {
-     const localData = localStorage.getItem("todos");
-     return localData ? JSON.parse(localData) : [];
-   });
+export default function Block({item}) {
+   const [value,setValue] = useState(item.data)
   return (
-    <React.Fragment>
-      {
-        todos.map(item => {
-          return (
             <div className="block-wrap">
               <div className="block-inner">
                 <div className="block-left">
@@ -24,10 +17,10 @@ export default function Block() {
               <input type="checkbox" />
             </div> */}
                   <div className="block-content">
-                    <p className="small-text">{item.data}</p>
+                    <p className="small-text">Website</p>
                     <div className="block-input">
                       <CgWebsite className="website-icon" />
-                      <input type="text" placeholder="Name your QR Code..." />
+                      <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Name your QR Code..." />
                     </div>
                     <div className="block-content__inform">
                       <div className="inform-left">
@@ -55,7 +48,7 @@ export default function Block() {
                           <span>
                             <BsArrowReturnRight />
                           </span>
-                          kun.uz
+                          {item.data}
                         </p>
                       </div>
                     </div>
@@ -87,10 +80,6 @@ export default function Block() {
                 </div>
               </div>
             </div>
-          );
-        })
-      }
-    </React.Fragment>
   
   );
 }
