@@ -13,6 +13,7 @@
   }
   .lists {
     height: 100%;
+    overflow-y: auto;
     position: absolute;
     left: 280px;
     width: calc(100% - 280px);

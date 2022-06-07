@@ -5,25 +5,34 @@ import './sidebar.scss'
 const Sidebar = ({item}) => {
     const [value,setValue]= useState('')
     const [data,setData] = useState(item)
-    useEffect(() => {
-         const filteredCountries = item.filter((country) => {
-           return (
-             country.data.toLowerCase().indexOf(value.toLowerCase()) !== -1
-           );
-         });
-         setData(filteredCountries)
-    },[value])
-    return ( <div className='sidebar'>
+    const filtered =
+      value !== ""
+        ? data.filter((item) =>
+            item.data.toLowerCase().includes(value.toLowerCase())
+          )
+        : data;
+    return (
+      <div className="sidebar">
         <div className="row">
-            <div className="search">
-                <input type="search" placeholder='Search QR codes...' value={value} onChange={(e) => setValue(e.target.value)}/>
-                <span><AiOutlineSearch/></span>
-            </div>
-            {/* {
-                data.map(i => <p key={i.data}>{i.data}</p>)
-            } */}
+          <div className="search">
+            <input
+              type="search"
+              placeholder="Search QR codes..."
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            />
+            <span>
+              <AiOutlineSearch />
+            </span>
+          </div>
+          <ul>
+          {filtered.map((dt,index) => {
+            return <li key={index}>{index + 1 }) {dt.data}</li>;
+          })}
+          </ul>
         </div>
-    </div> );
+      </div>
+    );
 }
  
 export default Sidebar;

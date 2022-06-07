@@ -106,9 +106,9 @@
         line-height: 1;
         cursor: default;
       }
-      .link{
+      .link {
         margin-top: 20px;
-        a{
+        a {
           color: #47bdef;
           font-size: 15px;
           font-weight: 600;
@@ -117,7 +117,7 @@
         }
       }
     }
-    .btn {
+    .btn-wrap {
       .download-btn {
         cursor: pointer;
         width: 170px;
@@ -135,6 +135,97 @@
           background: #25acdd;
           color: #fff;
         }
+      }
+      .actions {
+        margin-top: 15px;
+        svg {
+          font-size: 22px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.mymodal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
+
+.myoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.modalWrapper {
+  padding: 10px 20px;
+  width: max-content;
+  display: flex;
+  .colors {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-gap: 20px;
+    .color {
+      box-sizing: border-box;
+      // padding: 0 10px;
+      min-width: 200px;
+      .react-colorful {
+        width: 100%;
+      }
+      h1 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #797d80;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .modal-qr {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    .save {
+      width: 100%;
+      cursor: pointer;
+      width: 100%;
+      font-size: 20px;
+      height: 35px;
+      color: white;
+      background: #00bfff;
+      border-radius: 10px;
+      border: 0;
+      margin-top: 20px;
+      &:hover {
+        background: #2abbeb;
       }
     }
   }

@@ -12,7 +12,7 @@ const Group = ({ open }) => {
      const leng = todos.length
 
      useEffect(()=>{
-       console.log(todos)
+      //  console.log(todos)
      },[todos])
 
   return (
@@ -22,7 +22,7 @@ const Group = ({ open }) => {
       </div>
       <div className={open ? "lists act" : "lists"}>
         {leng ? (
-          todos.map((item, index) => <Block item={item} key={index} />)
+          todos.map((item, index) => <Block item={item} todos={todos} index={index} key={index} />)
         ) : (
           <div className="box">
             <Link to="/create" className="btns">

@@ -71,12 +71,21 @@ const QrCoder = ({
     if (ref.current) {
       qrCode.append(ref.current);
     }
-  }, [qrCode, ref, color]);
+  }, [qrCode, ref]);
+
+  useEffect(()=>{
+    setOptions({
+      ...options,
+      cornersSquareOptions: { color: colorCircle },
+      backgroundOptions: { color: bgColor },
+      dotsOptions: { color: color },
+    });
+  },[color,colorCircle,bgColor])
 
   useEffect(() => {
     if (!qrCode) return;
     qrCode.update(options);
-  }, [qrCode, options]);
+  }, [qrCode,options]);
 
   const onDataChange = (event) => {
     setOptions((options) => ({
