@@ -26,20 +26,21 @@ const App = () => {
        
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<SignUp />} />
+          
           {
             currentUser ?
               <Route path="/group" element={<Group open={open} />} />
-              : <Route path="/login" element={<Login />} />
+              : <Route path="/" element={<SignUp />} />
           }
           {
             currentUser ?
               <Route path="/create" element={<QrCode />} />
-              : <Route path="/login" element={<Login />} />
+              : <Route path="/" element={<SignUp />} />
           }
           {
             currentUser ?
               <Route path="/dashboard" element={<Dashboard />} />
-              : <Route path="/login" element={<Login />} />
+              : <Route path="/" element={<SignUp />} />
           }
           {/* <Route path="/" element={<PrivateRoute/>}/> */}
         </Routes>

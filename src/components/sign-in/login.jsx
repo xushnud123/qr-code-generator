@@ -55,7 +55,7 @@ const Login = () => {
           </button>
         </form>
         <div>
-          <p><Link to='/signup'>Sign Up</Link></p>
+          <p><Link to='/'>Sign Up</Link></p>
         </div>
       </div>
     </div>
