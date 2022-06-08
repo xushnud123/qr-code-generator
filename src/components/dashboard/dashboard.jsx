@@ -24,7 +24,7 @@ export default function Dashboard() {
           <h2>Profile</h2>
           {error && alert(error)}
           <strong>Email:</strong> {currentUser.email}
-          <Link to="/update-profile">Update Profile</Link>
+          <Link to="/login">Update Profile</Link>
         </div>
       </div>
       <button type="button" className="btn" onClick={handleClick}>
