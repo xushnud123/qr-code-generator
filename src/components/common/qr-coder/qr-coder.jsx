@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 
 const QrCoder = ({
-  color = "000000",
-  colorCircle = "#222222",
-  bgColor = "#5FD4F3",
-  data = "http://qr-code-styling.com",
-  
+  color ,
+  colorCircle,
+  bgColor ,
+  data ,
 }) => {
+  
   const [options, setOptions] = useState({
     width: 148,
     height: 148,
@@ -87,23 +87,6 @@ const QrCoder = ({
     qrCode.update(options);
   }, [qrCode,options]);
 
-  const onDataChange = (event) => {
-    setOptions((options) => ({
-      ...options,
-      data: event.target.value,
-    }));
-  };
-
-  const onExtensionChange = (event) => {
-    setFileExt(event.target.value);
-  };
-
-  const onDownloadClick = () => {
-    if (!qrCode) return;
-    qrCode.download({
-      extension: fileExt,
-    });
-  };
 
   return <div ref={ref} className="qr" />;
 };

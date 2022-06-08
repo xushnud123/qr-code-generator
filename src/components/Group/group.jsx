@@ -8,21 +8,27 @@ const Group = ({ open }) => {
        const localData = localStorage.getItem("todos");
        return localData ? JSON.parse(localData) : [];
      });
-
+      const [value, setValue] = useState("");
+      const filtered =
+        value !== ""
+          ? todos.filter((item) =>
+              item.data.toLowerCase().includes(value.toLowerCase())
+            )
+          : todos;
      const leng = todos.length
 
-     useEffect(()=>{
+    //  useEffect(()=>{
       //  console.log(todos)
-     },[todos])
-
+//      },[todos])
+console.log("filtered", filtered);
   return (
     <div className="wrappers">
       <div className={open ? "sidebar active" : "sidebar"}>
-        <Sidebar item={todos} />
+        <Sidebar filtered={filtered} value={value} setValue={setValue} />
       </div>
       <div className={open ? "lists act" : "lists"}>
         {leng ? (
-          todos.map((item, index) => <Block item={item} todos={todos} index={index} key={index} />)
+          filtered.map((item, index) => <Block item={item} todos={todos} index={index} key={index} />)
         ) : (
           <div className="box">
             <Link to="/create" className="btns">

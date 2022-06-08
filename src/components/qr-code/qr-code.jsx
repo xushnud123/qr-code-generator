@@ -97,7 +97,7 @@ const QrCode = () => {
     setTodos([...todos, options]);
     console.log(options);
     console.log(todos);
-    localStorage.setItem("todos", JSON.stringify([...todos, options]));
+    localStorage.setItem("todos", JSON.stringify([...todos, {...options,id: Math.random() * 1000 }]));
   };
 
   return (

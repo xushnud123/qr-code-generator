@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import QrCoder from "../common/qr-coder/qr-coder";
 import Modal from "react-modal";
 import { HexColorPicker } from "react-colorful";
@@ -12,37 +12,37 @@ import "./block.scss";
 
 Modal.setAppElement("#root");
 
-export default function Block({ item,todos,index }) {
+export default function Block({ item, todos}) {
+  console.log('item',item)
   const [isOpen, setIsOpen] = useState(false);
-  const [todo,setTodo] = useState(todos)
+  const [todo, setTodo] = useState(todos);
+  const [val, setVal] = useState(item.data);
+  console.log('value',val)
   const [colors, setColors] = useState({
     color: item.dotsOptions.color,
     bgcolor: item.backgroundOptions.color,
     colorCircle: item.cornersSquareOptions.color,
   });
 
-   const [options, setOptions] = useState(item);
+  const [options, setOptions] = useState(item);
 
-     useEffect(() => {
-       setOptions({
-         ...options,
-         cornersSquareOptions: { color: colors.colorCircle },
-         backgroundOptions: { color: colors.bgcolor },
-         dotsOptions: { color: colors.color },
-       });
-     }, [colors]);
+  useEffect(() => {
+    setOptions({
+      ...options,
+      cornersSquareOptions: { color: colors.colorCircle },
+      backgroundOptions: { color: colors.bgcolor },
+      dotsOptions: { color: colors.color },
+    });
+  }, [colors]);
 
-
-     const saveBtn = () => {
-       const itemIndex = todo.indexOf(item)
-       let to = todo
-       to[itemIndex] = options
-       setTodo(to)
-       localStorage.setItem("todos", JSON.stringify(to));
-       setIsOpen(!isOpen);
-     }
-
-  const [value, setValue] = useState(item.data);
+  const saveBtn = () => {
+    const itemIndex = todo.filter(i => i.id === item.id);
+    let to = todo;
+    to[itemIndex] = options;
+    setTodo(to);
+    localStorage.setItem("todos", JSON.stringify(to));
+    setIsOpen(!isOpen);
+  };
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -83,14 +83,15 @@ export default function Block({ item,todos,index }) {
             </div>
           </div>
           <div className="modal-qr">
-
-          <QrCoder
-            color={options.dotsOptions.color}
-            colorCircle={options.cornersSquareOptions.color}
-            bgColor={options.backgroundOptions.color}
-            data={options.data}
-          />
-          <button className="save" onClick={()=>saveBtn()}>save</button>
+            <QrCoder
+              color={options.dotsOptions.color}
+              colorCircle={options.cornersSquareOptions.color}
+              bgColor={options.backgroundOptions.color}
+              data={options.data}
+            />
+            <button className="save" onClick={() => saveBtn()}>
+              save
+            </button>
           </div>
         </div>
       </Modal>
@@ -101,15 +102,16 @@ export default function Block({ item,todos,index }) {
               <input type="checkbox" />
             </div> */}
             <div className="block-content">
-              <p className="small-text">Website</p>
+              <p className="small-text">QrCode Name:</p>
               <div className="block-input">
                 <CgWebsite className="website-icon" />
-                <input
+                {/* <input
                   type="text"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
                   placeholder="Name your QR Code..."
-                />
+                /> */}
+                <h1>{item.data}</h1>
               </div>
               <div className="block-content__inform">
                 <div className="inform-left">
