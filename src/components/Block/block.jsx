@@ -13,11 +13,9 @@ import "./block.scss";
 Modal.setAppElement("#root");
 
 export default function Block({ item, todos}) {
-  console.log('item',item)
   const [isOpen, setIsOpen] = useState(false);
   const [todo, setTodo] = useState(todos);
   const [val, setVal] = useState(item.data);
-  console.log('value',val)
   const [colors, setColors] = useState({
     color: item.dotsOptions.color,
     bgcolor: item.backgroundOptions.color,

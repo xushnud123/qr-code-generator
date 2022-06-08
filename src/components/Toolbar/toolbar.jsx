@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { FiFilePlus } from "react-icons/fi";
@@ -7,10 +9,9 @@ import { BsPerson } from "react-icons/bs";
 import imgDesktopLogo from '../../assets/img/qrcg-pro-logo.svg'
 import imgMobilLogo from "../../assets/img/qrcg-pro-logo-short.svg";
 import "./toolbar.scss";
-import { Link } from "react-router-dom";
 
 const Toolbar = ({open,setOpen}) => {
-  
+    const { currentUser } = useAuth();
   return (
     <header className="toolbar">
       <nav className="toolbar__navigation">
@@ -30,7 +31,7 @@ const Toolbar = ({open,setOpen}) => {
         <div className="toolbar_navigation-items">
           <ul>
             <li>
-              <Link to="/">
+              <Link to="/group">
                 <FiFilePlus />
               </Link>
             </li>
@@ -41,9 +42,9 @@ const Toolbar = ({open,setOpen}) => {
             </li>
             <span></span>
             <li>
-              <Link to="/">
+              <Link to="/dashboard">
                 <BsPerson />
-                <p>Account</p>
+                <p>{currentUser.email}</p>
               </Link>
             </li>
           </ul>

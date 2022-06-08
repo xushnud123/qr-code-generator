@@ -20,7 +20,6 @@ const Group = ({ open }) => {
     //  useEffect(()=>{
       //  console.log(todos)
 //      },[todos])
-console.log("filtered", filtered);
   return (
     <div className="wrappers">
       <div className={open ? "sidebar active" : "sidebar"}>
