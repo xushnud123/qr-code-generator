@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -31,7 +31,7 @@ const Toolbar = ({open,setOpen}) => {
         <div className="toolbar_navigation-items">
           <ul>
             <li>
-              <Link to="/group">
+              <Link to="/">
                 <FiFilePlus />
               </Link>
             </li>
@@ -44,7 +44,7 @@ const Toolbar = ({open,setOpen}) => {
             <li>
               <Link to="/dashboard">
                 <BsPerson />
-                <p>{currentUser.email}</p>
+                <p>{ currentUser && currentUser.email}</p>
               </Link>
             </li>
           </ul>

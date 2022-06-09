@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "../sign-in/login.scss";
+import "./sign-up.scss";
 
 
 
@@ -26,7 +26,7 @@ const SignUp = () => {
       setError('')
       setLoading(true)
      await signup(email, password);
-     history("/group");
+     history("/");
     }
     catch
         {
@@ -41,6 +41,7 @@ const SignUp = () => {
     <div className="login-form">
       <div className="row">
         <h1>Sign Up</h1>
+        {error}
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="box">
             <label htmlFor="email">email</label>
@@ -73,10 +74,10 @@ const SignUp = () => {
             Sign Up
           </button>
         </form>
-        <div>
-          <p>
-            <Link to="/login">Login</Link>
-          </p>
+        <div className="links">
+          <span>
+            <Link to="/login">Log In? </Link>
+          </span>
         </div>
       </div>
     </div>

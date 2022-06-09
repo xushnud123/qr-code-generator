@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "./login.scss";
+import "../sign-up/sign-up.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(email, password)
-      history('/group')
+      history('/')
     } catch (e) {
       setError("Failed to create login");
     }
@@ -49,13 +49,12 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-         
           <button disabled={loading} className="btn" type="submit">
             Login
           </button>
         </form>
-        <div>
-          <p><Link to='/'>Sign Up</Link></p>
+        <div className="links">
+          <span><Link to='/signup'>Sign Up</Link></span>
         </div>
       </div>
     </div>
