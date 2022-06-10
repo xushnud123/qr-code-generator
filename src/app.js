@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Group from "./components/Group/group";
 import QrCode from "./components/qr-code/qr-code";
@@ -12,12 +12,15 @@ import { useAuth } from "./context/AuthContext";
 
 const App = () => {
   const [open, setOpen] = useState(false)
-  const { currentUser } = useAuth()
+  const { currentUser,load } = useAuth()
+  useEffect(()=>{
+
+},[load])
 
   return (
     <BrowserRouter>
       <div style={{ height: "100vh" }}>
-        {currentUser && <Toolbar open={open} setOpen={setOpen} />}
+        {<Toolbar open={open} setOpen={setOpen} />}
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />

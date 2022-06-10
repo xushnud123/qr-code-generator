@@ -16,6 +16,7 @@ const Login = () => {
     try {
       setError("");
       setLoading(true);
+
       await login(email, password)
       history('/')
     } catch (e) {

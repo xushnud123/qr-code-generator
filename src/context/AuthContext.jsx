@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -16,6 +16,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [load,setLoad] = useState(false)
+
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -23,29 +25,29 @@ export function AuthProvider({ children }) {
         const user = userCredential.user;
         setCurrentUser(user);
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // console.log(errorCode + errorMessage);
-      });
+      // .catch((error) => {
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+      //   // console.log(errorCode + errorMessage);
+      // });
   }
 
   function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password).then((user) => {
-      const uid = user.uid;
-      setCurrentUser(uid);
-      return uid;
-    });
+    setLoad(!load)
+    return signInWithEmailAndPassword(auth, email, password)
+    // .then((user) => {
+    //   const uid = user.uid;
+
+    //   setCurrentUser(uid);
+    //   // return uid;
+    // });
   }
 
-  function logout(email, password) {
+
+  function logout(){
+    setCurrentUser('')
+    setLoad(!load);
     return signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
   }
 
   useEffect(() => {
@@ -59,11 +61,23 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+   useEffect(() => {
+     const unsubscribe = onAuthStateChanged(auth, (user) => {
+       if (user) {
+         setCurrentUser(user);
+         setLoading(false);
+       } else {
+       }
+     });
+     return unsubscribe;
+   }, [load]);
+
   const value = {
     currentUser,
     signup,
     login,
-    logout
+    logout,
+    load
   };
   return (
     <AuthContext.Provider value={value}>
