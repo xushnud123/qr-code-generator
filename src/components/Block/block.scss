@@ -139,9 +139,29 @@
       }
       .actions {
         margin-top: 15px;
-        svg {
-          font-size: 22px;
-          cursor: pointer;
+        display: flex;
+        align-items: center;
+        span{
+          &:not(:nth-child(1)){
+            margin-left: 15px;
+          }
+          svg {
+            font-size: 22px;
+            cursor: pointer;
+            transition: all linear 0.2s;
+          }
+          &:hover{
+            &:nth-child(1){
+              svg{
+                color:#4361ee;
+              }
+            }
+            &:nth-child(2){
+              svg{
+                color:#ff006e;
+              }
+            }
+          }
         }
       }
     }

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { HexColorPicker } from "react-colorful";
 import { CgWebsite } from "react-icons/cg";
@@ -82,6 +83,7 @@ const QrCode = () => {
     }));
   };
 
+
   const onExtensionChange = (event) => {
     setFileExt(event.target.value);
   };
@@ -98,8 +100,35 @@ const QrCode = () => {
     localStorage.setItem("todos", JSON.stringify([...todos, {...options,id: Math.random() * 1000 }]));
   };
 
+
+    // motion
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      y: "100%",
+    },
+    visible: {
+      opacity: 1,
+      y: "0",
+      transition: {
+        delay: 0.1,
+        duration: 0.5,
+      },
+    },
+    exit: {
+      x: "-100vw",
+      y: "100%",
+      transition: { ease: "easeInOut" },
+    },
+  };
   return (
-    <div className="wrapper">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="wrapper"
+    >
       <div className="row">
         <div className="col">
           <div className="qr">
@@ -168,7 +197,7 @@ const QrCode = () => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

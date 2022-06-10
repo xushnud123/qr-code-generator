@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import QrCoder from "../common/qr-coder/qr-coder";
 import Modal from "react-modal";
+import { motion } from "framer-motion";
+import QrCoder from "../common/qr-coder/qr-coder";
 import { HexColorPicker } from "react-colorful";
 import { CgWebsite } from "react-icons/cg";
 import { MdOutlineFolderOpen } from "react-icons/md";
@@ -8,11 +9,12 @@ import { FiClock } from "react-icons/fi";
 import { BiLink } from "react-icons/bi";
 import { BsArrowReturnRight } from "react-icons/bs";
 import { VscSymbolColor } from "react-icons/vsc";
+import { AiOutlineDelete } from "react-icons/ai";
 import "./block.scss";
 
 Modal.setAppElement("#root");
 
-export default function Block({ item, todos}) {
+export default function Block({ item, todos,setTodos ,handleDelete }) {
   const [isOpen, setIsOpen] = useState(false);
   const [todo, setTodo] = useState(todos);
   const [val, setVal] = useState(item.data);
@@ -34,7 +36,7 @@ export default function Block({ item, todos}) {
   }, [colors]);
 
   const saveBtn = () => {
-    const itemIndex = todo.filter(i => i.id === item.id);
+    const itemIndex = todo.filter((i) => i.id === item.id);
     let to = todo;
     to[itemIndex] = options;
     setTodo(to);
@@ -42,12 +44,23 @@ export default function Block({ item, todos}) {
     setIsOpen(!isOpen);
   };
 
+  // const handleDelete = (id) => {
+  //   const itemIndex = todo.filter((i) => i.id !== id);
+  //   setTodos(itemIndex)
+  //   localStorage.setItem("todos", JSON.stringify(itemIndex));
+  // };
+
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <React.Fragment>
+    <motion.div
+      layout
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+    >
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -167,11 +180,14 @@ export default function Block({ item, todos}) {
                 <span onClick={() => setIsOpen(!isOpen)}>
                   <VscSymbolColor />
                 </span>
+                <span onClick={() => handleDelete(item.id)}>
+                  <AiOutlineDelete />
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </motion.div>
   );
 }
