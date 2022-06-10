@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Link, useNavigate} from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "../sign-up/sign-up.scss";
@@ -9,7 +10,7 @@ const Login = () => {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate()
+  const history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,17 +18,42 @@ const Login = () => {
       setError("");
       setLoading(true);
 
-      await login(email, password)
-      history('/')
+      await login(email, password);
+      history("/");
     } catch (e) {
       setError("Failed to create login");
     }
     setLoading(false);
   };
 
+  // motion
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      x: "100%",
+    },
+    visible: {
+      opacity: 1,
+      x: "0",
+      transition: {
+        delay: 0.1,
+        duration: 0.5,
+      },
+    },
+    exit: {
+      x: "100%",
+      transition: { ease: "easeInOut" },
+    },
+  };
 
   return (
-    <div className="login-form">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="login-form"
+    >
       <div className="row">
         <h1>Login</h1>
         <p>{error}</p>
@@ -55,10 +81,12 @@ const Login = () => {
           </button>
         </form>
         <div className="links">
-          <span><Link to='/signup'>Sign Up</Link></span>
+          <span>
+            <Link to="/signup">Sign Up</Link>
+          </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

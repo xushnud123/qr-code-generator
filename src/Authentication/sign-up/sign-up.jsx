@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Link,useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./sign-up.scss";
@@ -6,39 +7,62 @@ import "./sign-up.scss";
 
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const { signup } = useAuth();
-  const [error,setError] = useState('')
-  const [loading,setLoading] = useState(false)
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (password !== passwordConfirm) {
       alert("password teng emas passwor-confirmga");
-        return setError('password teng emas passwor-confirmga')
+      return setError("password teng emas passwor-confirmga");
     }
-  
-    try{
-      setError('')
-      setLoading(true)
-     await signup(email, password);
-     history("/");
+
+    try {
+      setError("");
+      setLoading(true);
+      await signup(email, password);
+      history("/");
+    } catch {
+      setError("Failed to create an account");
     }
-    catch
-        {
-          setError('Failed to create an account')
-        }    
-      setLoading(false)
+    setLoading(false);
   };
 
-
+  //motion
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      y: "-100%",
+    },
+    visible: {
+      opacity: 1,
+      y: "0",
+      transition: {
+        delay: 0.3,
+        duration: 0.5,
+      },
+    },
+    exit: {
+      x: "-100vw",
+      y: "-100%",
+      transition: { ease: "easeInOut" },
+    },
+  };
 
   return (
-    <div className="login-form">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="login-form"
+    >
       <div className="row">
         <h1>Sign Up</h1>
         {error}
@@ -80,7 +104,7 @@ const SignUp = () => {
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
